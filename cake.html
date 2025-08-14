@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cake Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f9;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background: #bd232b;
+            color: #fff;
+            padding: 16px 0;
+            text-align: center;
+            font-size: 2em;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        .cake-list {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 24px 0 8px 0;
+        }
+        .cake-list img {
+            width: 140px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px #ccc;
+        }
+        .cake-label {
+            text-align: center;
+            margin-top: 6px;
+            font-size: 1em;
+        }
+        .order-container {
+            background: #fff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 24px 30px 24px 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 20px #ddd;
+        }
+        .order-title {
+            text-align: center;
+            font-size: 1.3em;
+            color: #2357bd;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .order-form label {
+            display: block;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+        .order-form input[type=number] {
+            width: 100%;
+            padding: 7px;
+            margin-bottom: 0px;
+            font-size: 1em;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+        .order-form button {
+            width: 100%;
+            background: #3476ed;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            padding: 10px 0;
+            margin-top: 18px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .order-form button:hover {
+            background: #1051b1;
+        }
+        .bill-box {
+            text-align: center;
+            margin-top: 26px;
+        }
+        .bill-title {
+            color: green;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .total-price {
+            background: #34d066;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 7px 0px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">CAKE SHOP</div>
+
+    <div class="cake-list">
+        <div>
+            <img src="rcake.jpg" alt="Rainbow Cake">
+            <div class="cake-label">Rainbow Cake – Rs. 300</div>
+        </div>
+        <div>
+            <img src="ccake.jpg" alt="Chocolate Cake">
+            <div class="cake-label">Chocolate Cake – Rs. 200</div>
+        </div>
+        <div>
+            <img src="rcake.webp" alt="Red Velvet Cake">
+            <div class="cake-label">Red Velvet Cake – Rs. 250</div>
+        </div>
+        <div>
+            <img src="bcake.webp" alt="Black Forest Cake">
+            <div class="cake-label">Black Forest Cake – Rs. 350</div>
+        </div>
+    </div>
+
+    <div class="order-container">
+        <div class="order-title">Order Cake</div>
+        <form class="order-form" id="cakeOrderForm">
+            <label>Rainbow Cake (Quantity)
+                <input type="number" id="rainbowQty" min="0" value="0">
+            </label>
+            <label>Chocolate Cake (Quantity)
+                <input type="number" id="chocQty" min="0" value="0">
+            </label>
+            <label>Red Velvet Cake (Quantity)
+                <input type="number" id="redvelvetQty" min="0" value="0">
+            </label>
+            <label>Black Forest Cake (Quantity)
+                <input type="number" id="blackforestQty" min="0" value="0">
+            </label>
+            <button type="submit">Place Order</button>
+        </form>
+        <div class="bill-box" id="billBox" style="display:none;">
+            <div class="bill-title">Purchase Order Bill!!!</div>
+            <div class="total-price" id="totalPrice"></div>
+        </div>
+    </div>
+
+    <script>
+        
+        const prices = {
+            rainbow: 300,
+            chocolate: 200,
+            redvelvet: 250,
+            blackforest: 350
+        };
+
+        document.getElementById('cakeOrderForm').addEventListener('submit', function(event){
+            event.preventDefault();
+
+            
+            const rainbowQty = parseInt(document.getElementById('rainbowQty').value) || 0;
+            const chocQty = parseInt(document.getElementById('chocQty').value) || 0;
+            const redvelvetQty = parseInt(document.getElementById('redvelvetQty').value) || 0;
+            const blackforestQty = parseInt(document.getElementById('blackforestQty').value) || 0;
+
+            
+            const total = (rainbowQty * prices.rainbow)
+                        + (chocQty * prices.chocolate)
+                        + (redvelvetQty * prices.redvelvet)
+                        + (blackforestQty * prices.blackforest);
+
+          
+            document.getElementById('billBox').style.display = 'block';
+            document.getElementById('totalPrice').textContent = "Total Price: Rs. " + total;
+        });
+    </script>
+</body>
+</html>
